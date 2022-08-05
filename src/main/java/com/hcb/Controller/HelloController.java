@@ -11,6 +11,6 @@ public class HelloController {
     @GetMapping("")
     public String hello(){
         System.out.println("第一次部署项目....");
-        return "Hello,Linux";
+        return "卧槽，真的巨秀好吧";
     }
 }

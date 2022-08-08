@@ -13,8 +13,8 @@ import java.util.Set;
 
 
 /**
-* 使用Jedis操作redis
-* */
+ * 使用Jedis操作redis
+ */
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class JedisTest {
@@ -23,27 +23,27 @@ public class JedisTest {
     private RedisTemplate redisTemplate;
 
     @Test
-    public void testRedis(){
+    public void testRedis() {
         //1.获取链接
-        Jedis jedis = new Jedis("localhost",6379);
+        Jedis jedis = new Jedis("localhost", 6379);
 
         //2.执行具体的操作
-        jedis.zadd("people",0.1,"hcb");
+        jedis.zadd("people", 0.1, "hcb");
 
         //3.关闭链接
         jedis.close();
     }
 
     @Test
-    public void bootDataRedisForZSet(){
+    public void bootDataRedisForZSet() {
         redisTemplate.keys("*");
 
         ValueOperations valueOperations = redisTemplate.opsForValue();
 
         ZSetOperations zSetOperations = redisTemplate.opsForZSet();
-        zSetOperations.add("people","hcb",0.5);
-        zSetOperations.add("people","zxy",1.0);
-        zSetOperations.add("people","xrk",1.5);
+        zSetOperations.add("people", "hcb", 0.5);
+        zSetOperations.add("people", "zxy", 1.0);
+        zSetOperations.add("people", "xrk", 1.5);
         Set people = zSetOperations.range("people", 0, -1);
 
         System.out.println(people);
@@ -51,11 +51,11 @@ public class JedisTest {
     }
 
     @Test
-    public void Hash(){
+    public void Hash() {
         HashOperations hashOperations = redisTemplate.opsForHash();
-        hashOperations.put("people","name","hcb");
-        hashOperations.put("people","sex","men");
-        hashOperations.put("people","age","20");
+        hashOperations.put("people", "name", "hcb");
+        hashOperations.put("people", "sex", "men");
+        hashOperations.put("people", "age", "20");
 
         System.out.println(hashOperations.get("people", "name"));
         Set people = hashOperations.keys("people");
@@ -67,16 +67,16 @@ public class JedisTest {
     }
 
     @Test
-    public void Set(){
+    public void Set() {
         SetOperations setOperations = redisTemplate.opsForSet();
-        setOperations.remove("people","xrk","hcb","jll","zxy");
+        setOperations.remove("people", "xrk", "hcb", "jll", "zxy");
     }
 
     /**
      * Redis的通用操作
-     * */
+     */
     @Test
-    public void CommonRedis(){
+    public void CommonRedis() {
 
         //获取所有的Key
         System.out.println(redisTemplate.keys("*"));

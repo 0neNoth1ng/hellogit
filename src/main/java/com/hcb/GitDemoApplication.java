@@ -8,6 +8,7 @@ public class GitDemoApplication {
 
     public static void main(String[] args) {
         System.out.println("helloGit!");
+        System.out.println("在GitHub上新建了仓库");
         SpringApplication.run(GitDemoApplication.class, args);
     }
 
